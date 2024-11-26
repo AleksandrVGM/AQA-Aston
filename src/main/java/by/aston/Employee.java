@@ -28,4 +28,15 @@ public class Employee {
                 ", age=" + age +
                 '}';
     }
+
+    public static void main(String[] args) {
+        //task2
+        Employee[] employees = new Employee[5];
+        employees[0] = new Employee("Bill Gates", "Retiree", "BillGates@gmail.com", "+375 84 5932659", 0, 69);
+        employees[1] = new Employee("Elon Musk", "Twitter owner", "ElonMusk@gmail.com", "+375 42 5649281", 99, 53);
+        employees[2] = new Employee("Larry Page", "CEO", "LarryPage@gmail.com", "+375 14 5843987", 999, 51);
+        employees[3] = new Employee("Sergey Brin", "Co-founder Alphabet Inc.", "SergeyBrin.com", "+375 25 5894613", 9999, 51);
+        employees[4] = new Employee("Larry Ellison", "CTO", "LarryEllison@gmail.com", "+375 28 3216548", 99999, 80);
+    }
+
 }
