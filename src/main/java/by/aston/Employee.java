@@ -2,12 +2,12 @@ package by.aston;
 
 //task1
 public class Employee {
-    String FIO;
-    String position;
-    String email;
-    String phone;
-    int salary;
-    int age;
+    private String FIO;
+    private String position;
+    private String email;
+    private String phone;
+    private int salary;
+    private int age;
 
     public Employee(String FIO, String position, String email, String phone, int salary, int age) {
         this.FIO = FIO;
@@ -17,6 +17,7 @@ public class Employee {
         this.salary = salary;
         this.age = age;
     }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -38,5 +39,4 @@ public class Employee {
         employees[3] = new Employee("Sergey Brin", "Co-founder Alphabet Inc.", "SergeyBrin.com", "+375 25 5894613", 9999, 51);
         employees[4] = new Employee("Larry Ellison", "CTO", "LarryEllison@gmail.com", "+375 28 3216548", 99999, 80);
     }
-
 }
