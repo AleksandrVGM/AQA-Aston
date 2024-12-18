@@ -34,18 +34,13 @@ public class Main {
     public static Map<String, Integer> countNumberOfWords(String[] words) {
         Map<String, Integer> numberOfWords = new LinkedHashMap<>();
         for (String word : words) {
-/*            if (numberOfWords.containsKey(word)) {
+            if (numberOfWords.containsKey(word)) {
                 int number = numberOfWords.get(word);
                 number++;
                 numberOfWords.put(word, number);
             } else {
                 numberOfWords.put(word, 1);
             }
-            */
-
-            numberOfWords.computeIfPresent(word, (k,v) -> v+1);
-            numberOfWords.putIfAbsent(word, 1);
-//            numberOfWords.merge(word, 1, (v1,v2)-> v1+1);
         }
         return numberOfWords;
     }
