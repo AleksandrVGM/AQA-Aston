@@ -2,7 +2,7 @@ package by.aston;
 
 public class FactorialException extends IllegalArgumentException {
 
-    public static final String messageException = "";
+    public static final String messageException = "The number is negative. The number must be greater than zero";
     public FactorialException() {
     }
 
