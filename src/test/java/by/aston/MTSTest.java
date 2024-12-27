@@ -73,6 +73,7 @@ class MTSTest {
     @Test
     @DisplayName("Ссылка \"Подробнее о сервисе\"")
     public void linkTest() {
+  //      driver.findElement(By.className("cookie__buttons")).findElements(By.tagName("button")).stream().filter(e -> e.getText().equals("Отклонить")).findFirst().get().click();
         String url = "https://www.mts.by/help/poryadok-oplaty-i-bezopasnost-internet-platezhey/";
         WebElement link = driver.findElement(By.className("pay__wrapper")).findElement(By.cssSelector("a"));
         link.click();
