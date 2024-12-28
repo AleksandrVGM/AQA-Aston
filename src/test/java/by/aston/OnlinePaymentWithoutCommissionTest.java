@@ -4,13 +4,11 @@ import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 class OnlinePaymentWithoutCommissionTest {
+
+    public static final String PHONE_NUMBER = "297777777";
+    public String SUM = "11";
 
     private OnlinePaymentWithoutCommission onlinePaymentWithoutCommission;
     private static WebDriver driver;
@@ -23,10 +21,8 @@ class OnlinePaymentWithoutCommissionTest {
 
     @BeforeEach
     void setUpEach() {
-        driver.get("https://mts.by");
         onlinePaymentWithoutCommission = new OnlinePaymentWithoutCommission(driver);
     }
-
 
     @AfterAll
     static void tearDown() {
@@ -34,7 +30,7 @@ class OnlinePaymentWithoutCommissionTest {
     }
 
     @Test
-    public void nameTest() {
+    public void nameOnlinePaymentWithoutCommissionTest() {
         String name = "Онлайн пополнение\nбез комиссии";
         Assertions.assertEquals(name, onlinePaymentWithoutCommission.getName());
     }
@@ -70,43 +66,50 @@ class OnlinePaymentWithoutCommissionTest {
     }
 
     @Test
-    public void linkTest() {
+    public void linkPaymentRulesTest() {
         PaymentRules paymentRules = onlinePaymentWithoutCommission.clickLinkServiceDetails();
         Assertions.assertEquals(PaymentRules.TITLE, paymentRules.getTitle());
         Assertions.assertEquals(PaymentRules.URL, paymentRules.getUrl());
     }
 
     @Test
-    public void paymentTest(){
-        String phoneNumber = "297777777";
-        String sum = "11";
-        /*should return new object page*/
-        BePaidIFrame bePaidIFrame = onlinePaymentWithoutCommission.typePhoneNumber(phoneNumber).typeSum(sum).submitPayButton();
-//        driver.findElement(By.className("cookie")).findElements(By.tagName("button")).stream().filter(webElement -> webElement.getText().equals("Отклонить")).findFirst().get();
-
-
-//        bePaidIFrame.getPhoneNumber()
-
-//        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.className("bepaid-iframe")));
-
-        driver.findElement(By.className("pay-description__text")).getText();//Оплата: Услуги связи Номер:375297777777
-        driver.findElement(By.className("pay-description__cost")).getText();//11.00 BYN
-        driver.findElement(By.id("cc-number")).getTagName(); // number card
-
-
-
-
-        driver.findElement(By.className("colored")).getText();//button 11 BYN
-
-        driver.findElement(By.className("app-input")).findElement(By.tagName("label")).getText();
-        driver.findElement(By.className("ng-tns-c46-3")).getText(); //Имя держателя (как на карте)
-
-
-
-//        driver.switchTo().frame(driver.findElement(By.className("bepaid-iframe")));
-        System.out.println("end");
-
+    public void labelCartNumberTest(){
+        BePaidIFrame bePaidIFrame = onlinePaymentWithoutCommission.typePhoneNumber(PHONE_NUMBER).typeSum(SUM).submitPayButton();
+        Assertions.assertEquals(BePaidIFrame.LABEL_CART_NUMBER, bePaidIFrame.getLabelCartNumber());
+    }
+    @Test
+    public void labelValidityPeriodTest(){
+        BePaidIFrame bePaidIFrame = onlinePaymentWithoutCommission.typePhoneNumber(PHONE_NUMBER).typeSum(SUM).submitPayButton();
+        Assertions.assertEquals(BePaidIFrame.LABEL_VALIDITY_PERIOD, bePaidIFrame.getLabelValidityPeriod());
     }
 
+    @Test
+    public void labelCVCTest(){
+        BePaidIFrame bePaidIFrame = onlinePaymentWithoutCommission.typePhoneNumber(PHONE_NUMBER).typeSum(SUM).submitPayButton();
+        Assertions.assertEquals(BePaidIFrame.LABEL_CVC, bePaidIFrame.getLabelCVC());
+    }
+    @Test
+    public void labelOwnerNameTest(){
+        BePaidIFrame bePaidIFrame = onlinePaymentWithoutCommission.typePhoneNumber(PHONE_NUMBER).typeSum(SUM).submitPayButton();
+        Assertions.assertEquals(BePaidIFrame.LABEL_OWNER_NAME, bePaidIFrame.getLabelOwnerName());
+    }
 
+    @Test
+    public void phoneNumberTest(){
+        BePaidIFrame bePaidIFrame = onlinePaymentWithoutCommission.typePhoneNumber(PHONE_NUMBER).typeSum(SUM).submitPayButton();
+        String phoneNumber = bePaidIFrame.getPhoneNumber().substring(3);
+        Assertions.assertEquals(PHONE_NUMBER, phoneNumber);
+    }
+    @Test
+    public void sumButtonTest(){
+        BePaidIFrame bePaidIFrame = onlinePaymentWithoutCommission.typePhoneNumber(PHONE_NUMBER).typeSum(SUM).submitPayButton();
+        String sum = String.format(BePaidIFrame.LABEL_BUTTON, SUM);
+        Assertions.assertEquals(sum, bePaidIFrame.getSumOnButton());
+    }
+    @Test
+    public void sumTest(){
+        BePaidIFrame bePaidIFrame = onlinePaymentWithoutCommission.typePhoneNumber(PHONE_NUMBER).typeSum(SUM).submitPayButton();
+        String sum = String.format(BePaidIFrame.LABEL_SUM, SUM);
+        Assertions.assertEquals(sum, bePaidIFrame.getSum());
+    }
 }
