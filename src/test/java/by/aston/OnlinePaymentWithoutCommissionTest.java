@@ -4,6 +4,7 @@ import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 
 class OnlinePaymentWithoutCommissionTest {
 
@@ -112,4 +113,11 @@ class OnlinePaymentWithoutCommissionTest {
         String sum = String.format(BePaidIFrame.LABEL_SUM, SUM);
         Assertions.assertEquals(sum, bePaidIFrame.getSum());
     }
+
+    @Test
+    public void homeInternet(){
+        HomeInternet homeInternet = new HomeInternet(driver);
+        homeInternet.getPlaceHolderEMail();
+    }
+
 }
