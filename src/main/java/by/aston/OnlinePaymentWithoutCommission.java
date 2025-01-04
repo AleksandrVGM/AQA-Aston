@@ -71,19 +71,16 @@ public class OnlinePaymentWithoutCommission {
     }
 
     public void onCanceledCookies(){
-//        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("cookie")));
-
-//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
         try {
             new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("cookie")));
             driver.findElement(By.className("cookie")).findElements(By.tagName("button")).stream()
                     .filter(button -> button.getText().equals(NAME_BUTTON_CANCEL)).findFirst().get().click();
-
         }
         catch (Exception e){
-
+            //
         }
-
     }
+
+
+
 }
