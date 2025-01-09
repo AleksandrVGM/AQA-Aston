@@ -10,7 +10,7 @@ import java.time.Duration;
 import java.util.List;
 
 public class BePaidIFrame {
-    public static final String LABEL_CART_NUMBER = "Номер карты";
+    public static final String LABEL_CARD_NUMBER = "Номер карты";
     public static final String LABEL_VALIDITY_PERIOD = "Срок действия";
     public static final String LABEL_CVC = "CVC";
     public static final String LABEL_OWNER_NAME = "Имя держателя (как на карте)";
@@ -62,6 +62,6 @@ public class BePaidIFrame {
     }
 
     private void setWebDriverWaiter(String locatorClassName){
-        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className(locatorClassName)));
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className(locatorClassName)));
     }
 }
