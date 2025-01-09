@@ -87,15 +87,6 @@ class OnlinePaymentWithoutCommissionTest {
     @Test
     public void homeInternetPlaceHoldersTest() {
         HomeInternet homeInternet = new HomeInternet(driver);
-/*
-        driver.findElement(By.className("select__header")).click();
-
-//        new Actions(driver).click(driver.findElement(By.xpath("//section/div/div[1]/div[1]/div[2]/ul/li[2]/p"))).build().perform();
-        WebElement element = driver.findElement(By.xpath("//section/div/div[1]/div[1]/div[2]/ul/li[1]/p"));
-        element.click();
-//        new Actions(driver).click(driver.findElement(By.xpath("//section/div/div[1]/div[1]/div[2]/ul/li[3]/p"))).build().perform();
-        homeInternet.getPlaceHolderEMail();
-*/
         Assertions.assertEquals(HomeInternet.PLACEHOLDER_ABONENT_NUMBER, homeInternet.getPlaceHolderPhoneNumber());
         Assertions.assertEquals(HomeInternet.PLACEHOLDER_SUM, homeInternet.getPlaceHolderSum());
         Assertions.assertEquals(HomeInternet.PLACEHOLDER_EMAIL, homeInternet.getPlaceHolderEMail());
