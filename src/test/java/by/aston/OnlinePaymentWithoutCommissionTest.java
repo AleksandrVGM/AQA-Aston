@@ -1,5 +1,6 @@
 package by.aston;
 
+import io.qameta.allure.Description;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -30,12 +31,14 @@ class OnlinePaymentWithoutCommissionTest {
     }
 
     @Test
+    @Description("Название блока \"Онлайн поплнение без комиссии\"")
     public void nameOnlinePaymentWithoutCommissionTest() {
         String name = "Онлайн пополнение\nбез комиссии";
         Assertions.assertEquals(name, onlinePaymentWithoutCommission.getName());
     }
 
     @Test
+    @Description("Логотипы платежный систем")
     public void logoTest() {
         Assertions.assertTrue(onlinePaymentWithoutCommission.getLogoNames().contains(OnlinePaymentWithoutCommission.LOGO_VISA));
         Assertions.assertTrue(onlinePaymentWithoutCommission.getLogoNames().contains(OnlinePaymentWithoutCommission.LOGO_VERIFIED_BY_VISA));
@@ -61,6 +64,7 @@ class OnlinePaymentWithoutCommissionTest {
     }
 
     @Test
+    @Description("Ссылка \"Подробнее о сервисе\"")
     public void linkPaymentRulesTest() {
         PaymentRules paymentRules = onlinePaymentWithoutCommission.clickLinkServiceDetails();
         Assertions.assertEquals(PaymentRules.TITLE, paymentRules.getTitle());
@@ -68,6 +72,7 @@ class OnlinePaymentWithoutCommissionTest {
     }
 
     @Test
+    @Description("Надписи в незаполненных полях реквизитов карты")
     public void labelCardTest() {
         BePaidIFrame bePaidIFrame = onlinePaymentWithoutCommission.typePhoneNumber(PHONE_NUMBER).typeSum(SUM).submitPayButton();
         Assertions.assertAll(() -> Assertions.assertEquals(BePaidIFrame.LABEL_CARD_NUMBER, bePaidIFrame.getLabelCartNumber()),
@@ -77,6 +82,7 @@ class OnlinePaymentWithoutCommissionTest {
     }
 
     @Test
+    @Description("Ссылка \"Подробнее о сервисе\"")
     public void paymentTest() {
         BePaidIFrame bePaidIFrame = onlinePaymentWithoutCommission.typePhoneNumber(PHONE_NUMBER).typeSum(SUM).submitPayButton();
         Assertions.assertAll(() -> Assertions.assertEquals(PHONE_NUMBER, bePaidIFrame.getPhoneNumber().substring(3)),
@@ -85,6 +91,7 @@ class OnlinePaymentWithoutCommissionTest {
     }
 
     @Test
+    @Description("Надписи в незаполненных полях \"Домашний интерент\"")
     public void homeInternetPlaceHoldersTest() {
         HomeInternet homeInternet = new HomeInternet(driver);
         Assertions.assertEquals(HomeInternet.PLACEHOLDER_ABONENT_NUMBER, homeInternet.getPlaceHolderPhoneNumber());
@@ -93,6 +100,7 @@ class OnlinePaymentWithoutCommissionTest {
     }
 
     @Test
+    @Description("Надписи в незаполненных полях \"Рассрочка\"")
     public void instalmentPlaceHoldersTest() {
         Instalment instalment = new Instalment(driver);
         Assertions.assertEquals(Instalment.SCORE_INSTALMENT, instalment.getPlaceHolderScoreInstalment());
@@ -101,6 +109,7 @@ class OnlinePaymentWithoutCommissionTest {
     }
 
     @Test
+    @Description("Надписи в незаполненных полях \"Задолженность\"")
     public void indebtednessPlaceHoldersTest() {
         Indebtedness indebtedness = new Indebtedness(driver);
         Assertions.assertAll(() -> Assertions.assertEquals(Indebtedness.SCORE_ARREARS, indebtedness.getPlaceHolderScoreArrears()),
@@ -109,6 +118,7 @@ class OnlinePaymentWithoutCommissionTest {
     }
 
     @Test
+    @Description("Надписи в незаполненных полях \"Услуги связи\"")
     public void onlinePaymentWithoutCommissionPlaceHolderTest() {
         Assertions.assertAll(() -> Assertions.assertEquals(OnlinePaymentWithoutCommission.PHONE_NUMBER, onlinePaymentWithoutCommission.getPlaceHolderPhoneNumber()),
                 () -> Assertions.assertEquals(OnlinePaymentWithoutCommission.PLACEHOLDER_SUM, onlinePaymentWithoutCommission.getPlaceHolderSum()),
