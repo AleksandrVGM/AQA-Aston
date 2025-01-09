@@ -21,6 +21,7 @@ class MTSTest {
     private static final String LOGO_MASTERCARD = "MasterCard";
     private static final String LOGO_MASTERCARD_SECURE_CODE = "MasterCard Secure Code";
     private static final String LOGO_BELKART = "Белкарт";
+    private static final String PAGE_TITLE = "Порядок оплаты и безопасность интернет платежей";
 
 
     @BeforeAll
@@ -120,11 +121,16 @@ class MTSTest {
     @Test
     @DisplayName("Ссылка \"Подробнее о сервисе\"")
     public void linkTest() {
-  //      driver.findElement(By.className("cookie__buttons")).findElements(By.tagName("button")).stream().filter(e -> e.getText().equals("Отклонить")).findFirst().get().click();
+        this.onCanceledCookies();
         String url = "https://www.mts.by/help/poryadok-oplaty-i-bezopasnost-internet-platezhey/";
         WebElement link = driver.findElement(By.className("pay__wrapper")).findElement(By.cssSelector("a"));
         link.click();
         Assertions.assertEquals(url, driver.getCurrentUrl());
+        Assertions.assertEquals(PAGE_TITLE, driver.getTitle());
+
+        List<String> list = driver.findElements(By.tagName("h3")).stream().map(webElement -> webElement.getText()).collect(Collectors.toList());
+
+        Assertions.assertEquals(true, list.containsAll(List.of("Оплата банковской картой", "Информация о безопасности Интернет-платежей", "Условия возврата денежных средств")));
     }
 
     @Test
@@ -136,5 +142,6 @@ class MTSTest {
         money.sendKeys("11");
         WebElement button = driver.findElement(By.xpath("//*[@id=\"pay-connection\"]")).findElement(By.className("button"));
         button.click();
+        System.out.println("");
     }
 }
