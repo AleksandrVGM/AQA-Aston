@@ -2,6 +2,7 @@ package by.aston;
 
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.List;
@@ -27,6 +28,13 @@ class OnlinePaymentWithoutCommissionTest {
     @BeforeEach
     void setUpEach() {
         onlinePaymentWithoutCommission = new OnlinePaymentWithoutCommission(driver);
+    }
+    @AfterEach
+    void close(){
+        String handle = driver.getWindowHandle();
+        String newHandle = driver.switchTo().newWindow(WindowType.WINDOW).getWindowHandle();
+        driver.switchTo().window(handle).close();
+        driver.switchTo().window(newHandle);
     }
 
     @Test
